@@ -66,33 +66,26 @@ func printHelp() {
 
 func main() {
 
-	if len(os.Args) >= 3 {
-		// source file is os.Args[0], and thus is unnecessary
+	if len(os.Args) == 3 {
 		hashAlgo := os.Args[1]
-		filename := os.Args[2:]
+		filename := os.Args[2]
 		switch hashAlgo {
 		case "md5":
-			for file := 0; file < len(filename); file++ {
-				newSum := md5Sum(filename[file])
-				fmt.Printf("%s: %x\n", filename[file], newSum)
-			}
+			newSum := md5Sum(filename)
+			fmt.Printf("%s: %x", filename, newSum)
 		case "sha1":
-			for file := 0; file < len(filename); file++ {
-				newSum := sha1Sum(filename[file])
-				fmt.Printf("%s: %x\n", filename[file], newSum)
-			}
+			newSum := sha1Sum(filename)
+			fmt.Printf("%s: %x", filename, newSum)
 		case "sha256":
-			for file := 0; file < len(filename); file++ {
-				newSum := sha256Sum(filename[file])
-				fmt.Printf("%s: %x\n", filename[file], newSum)
-			}
+			newSum := sha256Sum(filename)
+			fmt.Printf("%s: %x", filename, newSum)
 		default:
-			// Print help because the supplied algo isn't available
 			printHelp()
+			// Print help because the supplied algo isn't available
 		}
 	} else {
-		// Print help because too few or too many arguments were given
 		printHelp()
+		// Print help because too few or too many arguments were given
 	}
 
 }
